@@ -1,0 +1,2 @@
+Arrastre a esta carpeta el archivo del Anexo 3 (Anexo_3 - Database.csv).
+Dentro de MySQL esta carpeta se ve como /var/lib/mysql-files/

@@ -1,0 +1,15 @@
+{
+  "name": "Tarea 3 · MySQL 8.4 + CloudBeaver + Grafana",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "hostRequirements": { "cpus": 2, "memory": "8gb" },
+  "forwardPorts": [8978, 3000, 3306],
+  "portsAttributes": {
+    "8978": { "label": "CloudBeaver (editor SQL)", "onAutoForward": "notify" },
+    "3000": { "label": "Grafana", "onAutoForward": "notify" },
+    "3306": { "label": "MySQL", "onAutoForward": "silent" }
+  },
+  "postStartCommand": "docker compose up -d && echo 'Entorno listo: abra la pestaña PORTS'"
+}
