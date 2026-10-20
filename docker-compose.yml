@@ -1,0 +1,38 @@
+# Entorno de la práctica (Tarea 3) dentro de GitHub Codespaces.
+# Se levanta solo al abrir el codespace. Para reiniciarlo a mano:  docker compose up -d
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: mysql_clase
+    environment:
+      MYSQL_ROOT_PASSWORD: Clase_UNAD_2026
+      TZ: America/Bogota
+    command: ["--local-infile=1", "--secure-file-priv=/var/lib/mysql-files"]
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./datos:/var/lib/mysql-files      # arrastre aquí el CSV del Anexo 3 (carpeta datos/)
+      - mysql_data:/var/lib/mysql
+
+  cloudbeaver:
+    image: dbeaver/cloudbeaver:24.2.0
+    container_name: cloudbeaver_clase
+    depends_on: [mysql]
+    ports:
+      - "8978:8978"
+    volumes:
+      - cloudbeaver_data:/opt/cloudbeaver/workspace
+
+  grafana:
+    image: grafana/grafana:11.3.0
+    container_name: grafana_clase
+    depends_on: [mysql]
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+
+volumes:
+  mysql_data:
+  cloudbeaver_data:
+  grafana_data:
